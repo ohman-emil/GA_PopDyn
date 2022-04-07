@@ -7,28 +7,22 @@ import matplotlib.pyplot as plt
 # r = growth rate
 # K = carrying capacity
 
-def model(N,t,r,K):
+# define model
+def func(N,t,r,K):
     dydt = r*N*(1-(N/K))
     return dydt
 
 # time points
 t = linspace(0,80)
 
-# ODE 1
-y0 = 50
-r = 0.05
-K = 500
-y1 = odeint(model,y0,t,args=(r,K))
+def plotODE(model, y0, t, r, K):
+    y = odeint(model,y0,t,args=(r,K)) # solve diff eq
+    plt.plot(t, y) # plot it
 
-# ODE 2
-y0 = 100
-r = 0.1
-K = 500
-y2 = odeint(model,y0,t,args=(r,K))
+plotODE(func, 100, t, 0.05, 500)
+plotODE(func, 100, t, 0.1, 500)
 
 # plot results
-plt.plot(t,y1,linewidth=2)
-plt.plot(t,y2,linewidth=2)
 plt.xlabel('time')
 plt.ylabel('y(t)')
 plt.show()
