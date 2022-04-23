@@ -1,5 +1,5 @@
 from numpy import linspace
-from scipy.integrate import odeint
+from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
 
 # N = biomass
@@ -8,19 +8,17 @@ import matplotlib.pyplot as plt
 # K = carrying capacity
 
 # define model
-def func(N,t,r,K):
+def func(t,N,r,K):
     dydt = r*N*(1-(N/K))
     return dydt
 
-# time points
-t = linspace(0,80)
+def plotODE(model, y0, t_span, r, K):
+    t = linspace(t_span[0],t_span[1])
+    sol = solve_ivp(model, t_span, y0, args=(r,K), method='LSODA', t_eval=t) # solve ODE
+    plt.plot(sol.t, sol.y[0]) # plot it
 
-def plotODE(model, y0, t, r, K):
-    y = odeint(model,y0,t,args=(r,K)) # solve diff eq
-    plt.plot(t, y) # plot it
-
-plotODE(func, 100, t, 0.05, 500)
-plotODE(func, 100, t, 0.1, 500)
+plotODE(func, [10], [0, 100], 0.05, 500) # model, [y0], [t0, t_end], growth_rate, carrying_capacity
+plotODE(func, [10], [0, 100], 0.1, 500)
 
 # plot results
 plt.xlabel('time')
