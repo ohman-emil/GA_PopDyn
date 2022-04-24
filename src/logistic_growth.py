@@ -13,7 +13,7 @@ def func(t,N,r,K):
     return dydt
 
 def plotODE(model, y0, t_span, r, K):
-    t = linspace(t_span[0],t_span[1])
+    t = linspace(t_span[0], t_span[1])
     sol = solve_ivp(model, t_span, y0, args=(r,K), method='LSODA', t_eval=t) # solve ODE
     plt.plot(sol.t, sol.y[0]) # plot it
 
