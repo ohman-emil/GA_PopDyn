@@ -1,15 +1,10 @@
 from numpy import linspace
 from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
+import json
 
 # is there (still) a better data structre?
-data = {
-    "n": 3, # no. of species
-    "r": [0.05, 0.1, 0.2],
-    "k": [100, 75, 150],
-    "t0": [30, 10, 5],
-    "interaction_matrix": [[1, 2, 2.5], [0.75, 1, 0.75], [0, 5, 1]]
-}
+data = json.load(open('./src/data/competitive_lotka_volterra/simple_example.json'))
 
 # define model
 def func(t, y, data):
@@ -25,7 +20,7 @@ def func(t, y, data):
     return res
 
 # time stuff
-t_span = [0, 150]
+t_span = data["t_span"]
 t = linspace(t_span[0], t_span[1], 2*t_span[1])
 
 # get inital values
