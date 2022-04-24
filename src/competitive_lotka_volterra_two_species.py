@@ -15,6 +15,7 @@ def func(t, y, e, c):
     dy1_dt = c[1]['r'] * y[1] * (1 - ((y[1] + e[1][0]*y[0]) / c[1]['k']))
     return [dy0_dt, dy1_dt]
 
+# time stuff
 t_span = [0, 150]
 t = linspace(t_span[0], t_span[1], 2*t_span[1])
 

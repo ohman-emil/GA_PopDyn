@@ -27,6 +27,7 @@ def func(t, y, a, b, c, d):
 
     return [dx_dt, dy_dt]
 
+# time stuff
 t_span = [0, 150]
 t = linspace(t_span[0], t_span[1], 2*t_span[1])
 
