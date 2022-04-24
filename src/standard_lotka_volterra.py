@@ -15,13 +15,13 @@ import matplotlib.pyplot as plt
 # dx/dt = ax - bxy
 # dy/dt = cxy - dy
 
-# define model
-def func(t,y):
-    a = 0.1
-    b = 0.02
-    c = 0.02
-    d = 0.4
+a = 0.1
+b = 0.02
+c = 0.02
+d = 0.4
 
+# define model
+def func(t, y, a, b, c, d):
     dx_dt = (a*y[0]) - (b*y[0]*y[1])
     dy_dt = (c*y[0]*y[1]) - (d*y[1])
 
@@ -32,7 +32,7 @@ t = linspace(t_span[0], t_span[1], 2*t_span[1])
 
 initial = [15, 10] # initial values
 
-sol = solve_ivp(func, t_span, initial, method='LSODA', t_eval=t) # solve ODE
+sol = solve_ivp(func, t_span, initial, method='LSODA', t_eval=t, args=(a, b, c, d,)) # solve ODE
 plt.plot(sol.t, sol.y[0], label="y[0]") # plot
 plt.plot(sol.t, sol.y[1], label="y[1]") # plot
 
