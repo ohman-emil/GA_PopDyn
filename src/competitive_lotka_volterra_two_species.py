@@ -1,3 +1,5 @@
+# NOTE: This is a proof-of-concept. Please use the n-species file
+
 from numpy import linspace
 from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
