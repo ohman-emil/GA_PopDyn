@@ -3,6 +3,9 @@ from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
 import json
 
+# matplotlib settings
+plt.style.use('seaborn-whitegrid')
+
 # is there (still) a better data structre?
 data = json.load(open('./src/data/competitive_lotka_volterra/simple_example.json'))
 

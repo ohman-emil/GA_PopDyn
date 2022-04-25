@@ -4,6 +4,9 @@ from numpy import linspace
 from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
 
+# matplotlib settings
+plt.style.use('seaborn-whitegrid')
+
 # Is there a better data structre?
 effects = [[1, 2], [0.75, 1]]
 constants = [
