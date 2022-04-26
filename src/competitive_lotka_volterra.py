@@ -12,7 +12,7 @@ import roman
 plt.style.use('seaborn-whitegrid')
 
 # is there (still) a better data structre?
-data = json.load(open('./src/data/competitive_lotka_volterra/wikipedia_example.json'))
+data = json.load(open(f'./src/data/competitive_lotka_volterra/{sys.argv[1]}.json'))
 
 # define model
 def func(t, y, data):
@@ -33,14 +33,16 @@ t = linspace(t_span[0], t_span[1], 2*t_span[1])
 
 # get inital values
 initial = []
-for i in range(data['n']):
-    initial.append(data["t0"][i])
+for i in data["t0"]:
+    initial.append(i)
 
 sol = solve_ivp(func, t_span, initial, method='LSODA', t_eval=t, args=(data,)) # solve ODE
 
 # loop through every species and plot it
 for i, item in enumerate(sol.y):
     plt.plot(sol.t, item, label=roman.int_to_roman(i))
+
+plt.plot(sol.t, sum(sol.y), alpha=0.75, linestyle='--', label="SUM") # create a line with total biomass
 
 # plot results
 plt.xlabel('time')
