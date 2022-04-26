@@ -2,12 +2,17 @@ from numpy import linspace
 from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
 import json
+import sys
+import os
+
+sys.path.append(os.path.join(sys.path[0], '..', 'helpers'))
+import roman
 
 # matplotlib settings
 plt.style.use('seaborn-whitegrid')
 
 # is there (still) a better data structre?
-data = json.load(open('./src/data/competitive_lotka_volterra/simple_example.json'))
+data = json.load(open('./src/data/competitive_lotka_volterra/wikipedia_example.json'))
 
 # define model
 def func(t, y, data):
@@ -35,7 +40,7 @@ sol = solve_ivp(func, t_span, initial, method='LSODA', t_eval=t, args=(data,)) #
 
 # loop through every species and plot it
 for i, item in enumerate(sol.y):
-    plt.plot(sol.t, item, label=f"y{i}")
+    plt.plot(sol.t, item, label=roman.int_to_roman(i))
 
 # plot results
 plt.xlabel('time')
