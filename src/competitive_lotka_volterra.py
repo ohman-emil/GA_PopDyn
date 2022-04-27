@@ -10,6 +10,7 @@ import roman
 
 # matplotlib settings
 plt.style.use('seaborn-whitegrid')
+plt.rcParams["figure.figsize"] = (16,8)
 
 # is there (still) a better data structre?
 data = json.load(open(f'./src/data/competitive_lotka_volterra/{sys.argv[1]}.json'))
@@ -47,5 +48,5 @@ plt.plot(sol.t, sum(sol.y), alpha=0.75, linestyle='--', label="SUM") # create a 
 # plot results
 plt.xlabel('time')
 plt.ylabel('biomass')
-plt.legend()
+plt.legend(loc="lower center", bbox_to_anchor=(0.5, 1), ncol=5, fontsize="xx-large")
 plt.show()
