@@ -1,9 +1,14 @@
+import time
+time_start = time.perf_counter() # start timer
+
 from numpy import linspace
 from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
 import json
 import sys
 import os
+
+time_modules = time.perf_counter() # time to import modules
 
 sys.path.append(os.path.join(sys.path[0], '..', 'helpers'))
 import roman
@@ -49,4 +54,14 @@ plt.plot(sol.t, sum(sol.y), alpha=0.75, linestyle='--', label="SUM") # create a 
 plt.xlabel('time')
 plt.ylabel('biomass')
 plt.legend(loc="lower center", bbox_to_anchor=(0.5, 1), ncol=5, fontsize="xx-large")
+
+# display time
+time_end = time.perf_counter()
+print(f"\
+    Total time: {round(time_end-time_start, 5)} s\n\
+    Module time: {round(time_modules-time_start, 5)} s\n\
+    Execution time: {round(time_end-time_modules, 5)} s"
+)
+
+# show diagram
 plt.show()
