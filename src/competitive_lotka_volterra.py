@@ -3,6 +3,7 @@ time_start = time.perf_counter() # start timer
 
 from numpy import linspace
 from scipy.integrate import solve_ivp
+import tikzplotlib
 import matplotlib.pyplot as plt
 import json
 import sys
@@ -62,6 +63,8 @@ print(f"\
     Module time: {round(time_modules-time_start, 5)} s\n\
     Execution time: {round(time_end-time_modules, 5)} s"
 )
+
+# tikzplotlib.save('test.tex')
 
 # show diagram
 plt.show()
